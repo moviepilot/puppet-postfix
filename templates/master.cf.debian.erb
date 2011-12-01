@@ -78,3 +78,5 @@ scalemail-backend unix	-	n	n	-	2	pipe
 mailman   unix  -       n       n       -       -       pipe
   flags=FR user=list argv=/usr/lib/mailman/bin/postfix-to-mailman.py
   ${nexthop} ${user}
+aws-email  unix  -       n       n       -       -       pipe
+  flags=R user=moviepilot argv=/opt/third-party/amazon/ses-send-email.pl -r -k /opt/third-party/amazon/aws-credentials ${recipient}

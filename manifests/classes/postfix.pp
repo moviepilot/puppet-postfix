@@ -81,6 +81,15 @@ class postfix {
     refreshonly => true,
     require     => Package["postfix"],
     subscribe   => File["/etc/aliases"],
+    notify      => Service["postfix"],
+  }
+  
+  # Aliases
+  exec { "newaliases-if-missing":
+    command     => "/usr/bin/newaliases",
+    require     => Package["postfix"],
+    creates     => "/etc/aliases.db",
+    notify      => Service["postfix"],
   }
 
   # Config files
